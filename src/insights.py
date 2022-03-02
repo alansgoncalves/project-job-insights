@@ -73,11 +73,6 @@ def get_min_salary(path):
     return min_salary_filter
 
 
-print(get_max_salary(
-    '/Users/alan/projects/back-end/sd-012-project-job-insights/src/jobs.csv'
-))
-
-
 def matches_salary_range(job, salary):
     """Checks if a given salary is in the salary range of a given job
 
