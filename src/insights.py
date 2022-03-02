@@ -60,27 +60,22 @@ def get_max_salary(path):
     return max_salary_filter
 
 
+def get_min_salary(path):
+    csv_file = read(path)
+
+    min_salary_filter = min(
+        map(
+            lambda job: int(job["min_salary"]), filter(
+                lambda job: job["min_salary"].isdigit(), csv_file
+            )
+        )
+    )
+    return min_salary_filter
+
+
 print(get_max_salary(
     '/Users/alan/projects/back-end/sd-012-project-job-insights/src/jobs.csv'
 ))
-
-
-def get_min_salary(path):
-    """Get the minimum salary of all jobs
-
-    Must call `read`
-
-    Parameters
-    ----------
-    path : str
-        Must be passed to `read`
-
-    Returns
-    -------
-    int
-        The minimum salary paid out of all job opportunities
-    """
-    pass
 
 
 def matches_salary_range(job, salary):
