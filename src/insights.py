@@ -3,6 +3,7 @@ from src.jobs import read
 
 def get_unique_job_types(path):
     csv_file = read(path)
+    # for in para retornar os valores da coluna job_type
     return list({job["job_type"] for job in csv_file})
 
 
@@ -26,6 +27,7 @@ def filter_by_job_type(jobs, job_type):
 
 def get_unique_industries(path):
     csv_file = read(path)
+    # for in para retornar os valores da coluna industry
     return list({ind["industry"] for ind in csv_file if ind["industry"]})
 
 
@@ -51,8 +53,12 @@ def get_max_salary(path):
     csv_file = read(path)
 
     max_salary_filter = max(
+        # map: HOF que aplica uma função a cada item da lista
         map(
+            # lambda: função anônima em python
+            # filter: HOF para filtrar da mesma forma que em JS
             lambda job: int(job["max_salary"]), filter(
+                # isdigit: retorna True se todos os caracteres forem dígitos
                 lambda job: job["max_salary"].isdigit(), csv_file
             )
         )
@@ -64,8 +70,12 @@ def get_min_salary(path):
     csv_file = read(path)
 
     min_salary_filter = min(
+        # map: HOF que aplica uma função a cada item da lista
         map(
+            # lambda: função anônima em python
+            # filter: HOF para filtrar da mesma forma que em JS
             lambda job: int(job["min_salary"]), filter(
+                # isdigit: retorna True se todos os caracteres forem dígitos
                 lambda job: job["min_salary"].isdigit(), csv_file
             )
         )
