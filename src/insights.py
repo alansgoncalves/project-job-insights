@@ -94,18 +94,20 @@ def matches_salary_range(job, salary):
 
 
 def filter_by_salary_range(jobs, salary):
-    """Filters a list of jobs by salary range
-
-    Parameters
-    ----------
-    jobs : list
-        The jobs to be filtered
-    salary : int
-        The salary to be used as filter
-
-    Returns
-    -------
-    list
-        Jobs whose salary range contains `salary`
-    """
-    return []
+    # cria variável para armazenar lista de empregos
+    jobs_list = []
+    # for in em jobs onde:
+    for job in jobs:
+        # teste a funão matches_salary_range
+        try:
+            matches_salary_range(job, salary)
+        # caso ocorra um erro, ValueError será retornado
+        except ValueError:
+            # Em seguida, usamos o pass para ignorar a excessão (expect)
+            pass
+        # se caso atenda a codição da função matches_salary_range,
+        else:
+            if matches_salary_range(job, salary):
+                # adiciona o emprego no array jobs_list
+                jobs_list.append(job)
+    return jobs_list
