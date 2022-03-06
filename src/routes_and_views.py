@@ -11,8 +11,13 @@ from .insights import (
     get_min_salary,
     get_max_salary,
 )
-from .more_insights import slice_jobs, get_int_from_args, build_jobs_urls
 
+from .more_insights import (
+    slice_jobs,
+    get_int_from_args,
+    build_jobs_urls,
+    get_job,  # importar a função o do arquivo
+)
 bp = Blueprint("client", __name__, template_folder="templates")
 
 
@@ -57,6 +62,17 @@ def list_jobs():
     }
 
     return render_template("list_jobs.jinja2", ctx=ctx)
+
+
+@bp.route("/job/<index>")  # define a rota /job/<index>
+def job(index):
+    # chama a função read para leitura do do relatório jobs.csv
+    jobs_doc = read("src/jobs.csv")
+    # chama a função get_job e seleciona um job específico através do index
+    job = get_job(jobs_doc, index)
+    # faz o retorno renderizando o template job.jinja2
+    # passando o parâmetro job contendo o job retornado pela get_job
+    return render_template("job.jinja2", job=job)
 
 
 def init_app(app: Flask):
